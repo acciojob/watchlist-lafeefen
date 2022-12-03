@@ -59,14 +59,17 @@ public class MovieRepository {
         if(directorMap.containsKey(director)) directorMap.remove(director);
     }
     public void  deleteAllDirector(){
-        HashSet<String> moviesSet = new HashSet<String>();
+        HashSet<String> movies = new HashSet<String>();
+        HashSet<String> directors = new HashSet<String>();
         for(String director: directorMovieMapping.keySet()){
+            directors.add(director);
             for(String movie: directorMovieMapping.get(director)){
-                moviesSet.add(movie);
+                if(movieMap.containsKey(movie)) movieMap.remove(movie);
             }
         }
-        for(String movie: moviesSet){
-            if(movieMap.containsKey(movie)) movieMap.remove(movie);
+        for(String director: directors){
+            if(directorMap.containsKey(director)) directorMap.remove(director);
+            if(directorMovieMapping.containsKey(director)) directorMovieMapping.remove(director);
         }
     }
 }
